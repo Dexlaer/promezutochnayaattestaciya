@@ -1,34 +1,26 @@
 ﻿
-// Задача 3: Задайте произвольную строку. Выясните, является ли она палиндромом.
+// Задача 1: Задайте значения M и N. Напишите программу, которая выведет все натуральные числа в промежутке от M до N. Использовать рекурсию, не использовать циклы.
 
-
-public class Task3
+class Program
 {
-    public static void Main(string[] args)
+    // Метод для рекурсивного вывода чисел от M до N
+    static void PrintNumbers(int m, int n)
     {
-        // Входная строка для проверки
-        string input = "bш2алашb";
-
-        // Вызов метода для проверки, является ли строка палиндромом
-        bool isPalindrome = IsPalindrome(input);
-
-        // Вывод результата
-        Console.WriteLine(isPalindrome ? "Да" : "Нет");
+        if (m <= n)
+        {
+            Console.Write(m + " "); // Вывод текущего числа
+            PrintNumbers(m + 1, n); // Рекурсивный вызов для следующего числа
+        }
     }
 
-    // Метод для проверки, является ли строка палиндромом
-    public static bool IsPalindrome(string str)
+    static void Main()
     {
-        // Нормализация строки путем удаления не буквенно-цифровых символов и приведения к нижнему регистру
-        string normalized = new string(str.Where(char.IsLetterOrDigit).ToArray()).ToLower();
+        Console.WriteLine("Введите M:");
+        int m = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Введите N:");
+        int n = Convert.ToInt32(Console.ReadLine());
 
-        // Сравнение строки с ее перевернутым вариантом
-        return normalized.SequenceEqual(normalized.Reverse());
+        Console.WriteLine($"Натуральные числа от {m} до {n}:");
+        PrintNumbers(m, n);
     }
 }
-
-// Метод IsPalindrome выполняет несколько действий:
-// Нормализует входную строку str, удаляя все символы, которые не являются буквами или цифрами (используя char.IsLetterOrDigit).
-// Приводит нормализованную строку к нижнему регистру (ToLower).
-// Проверяет, равна ли нормализованная строка своему перевёрнутому варианту (SequenceEqual(normalized.Reverse())).
-// Если строка совпадает со своей перевёрнутой версией, значит, она является палиндромом, и метод возвращает true; иначе возвращает false.
